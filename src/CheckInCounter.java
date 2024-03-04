@@ -83,7 +83,7 @@ public class CheckInCounter {
         int charge = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getExtraBaggageCharge();
 
         double extraWeightage = Double.parseDouble(enteredBaggageWeight) - maxWeight;
-        double chargePayable = extraWeightage > 0 ? (extraWeightage <= maxWeight ? charge : (extraWeightage / maxWeight) * charge) : 0;
+        double chargePayable = extraWeightage > 0 ? extraWeightage * charge : 0;
 
         String chargeLabel = String.valueOf(chargePayable);
 
