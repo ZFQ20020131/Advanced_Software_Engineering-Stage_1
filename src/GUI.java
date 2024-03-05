@@ -312,7 +312,7 @@ public class GUI extends JFrame implements ActionListener {
         if (e.getSource() == extraChargeButton) {
             extracharge = checkInCounterObj.calcExtraCharge(enteredReferenceNumber.trim(), baggaeWeightTextField.getText().trim(),
                     baggageVolumeTextField.getText().trim());
-            extraChargeLabel.setText("Have to pay" + extracharge + " Pounds Exatra ");
+            extraChargeLabel.setText("Have to pay" + extracharge + " Pounds Extra ");
             extraChargeLabel.setVisible(true);
         }
 
