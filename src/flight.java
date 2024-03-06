@@ -9,15 +9,6 @@ public class flight {
 
     public flight() {}
 
-    public flight(String flightCode, String carrier, int maxPassengersCount, int maxBaggageWeight, String dAirport, int extraBaggageCharge) {
-        this.flightCode = flightCode;
-        this.carrier = carrier;
-        this.maxPassengersCount = maxPassengersCount;
-        this.maxBaggageWeight = maxBaggageWeight;
-        this.dAirport = dAirport;
-        this.extraBaggageCharge = extraBaggageCharge;
-    }
-
     public void setFlightCode(String flightCode) {
         this.flightCode = flightCode;
     }
