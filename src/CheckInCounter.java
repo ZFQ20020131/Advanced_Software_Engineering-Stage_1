@@ -115,7 +115,7 @@ public class CheckInCounter {
     public String calcExtraCharge(String enteredReferenceNumber, String enteredBaggageWeight, String vol) {
         //currentFlight = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode());
         int chargedWeight = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getChargedBaggageWeight();
-        int charge = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getMaxBaggageVolume();
+        double charge = Double.parseDouble(vol);
 
         double extraWeightage = Double.parseDouble(enteredBaggageWeight) - chargedWeight;
         double chargePayable = extraWeightage > 0 ? extraWeightage * charge : 0;
