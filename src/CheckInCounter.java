@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CheckInCounter {
+    private String currentReferenceNumber;
     static int totalPassengersCheckedIn = 0;
     static double totalExcessBaggageFeeCollected = 0;
     static int totalBaggageWeightCheckedIn = 0;
@@ -57,8 +58,9 @@ public class CheckInCounter {
         newFlight.setDAirport(data[1]);
         newFlight.setCarrier(data[2]);
         newFlight.setMaxPassengersCount(Integer.parseInt(data[3]));
-        newFlight.setMaxBaggageWeight(Integer.parseInt(data[4]));
-        newFlight.setExtraBaggageCharge(Integer.parseInt(data[5]));
+        newFlight.setChargedBaggageWeight(Integer.parseInt(data[4]));
+        newFlight.setMaxBaggageVolume(Integer.parseInt(data[5]));
+        newFlight.setMaxBaggageWeight(Integer.parseInt(data[6]));
         flightDetailsMap.put(data[0], newFlight);
     }
 
@@ -77,12 +79,45 @@ public class CheckInCounter {
         return ticketsMap.get(enteredReferenceNumber).getName().getLastName().equalsIgnoreCase(enteredLastName);
     }
 
+    public String getCurrentReferenceNumber() {
+        return currentReferenceNumber;
+    }
+
+    public void setCurrentReferenceNumber(String enteredReferenceNumber) {
+        this.currentReferenceNumber = enteredReferenceNumber;
+    }
+
+    public int getMaxPassengers() {
+        if (currentReferenceNumber != null && !currentReferenceNumber.isEmpty()) {
+            int maxPassengers = flightDetailsMap.get(ticketsMap.get(currentReferenceNumber).getFlightCode()).getMaxPassengersCount();
+            return maxPassengers;
+        }
+        return -1;
+    }
+
+    public int getMaxBaggageVolume() {
+        if (currentReferenceNumber != null && !currentReferenceNumber.isEmpty()) {
+            int maxVolume = flightDetailsMap.get(ticketsMap.get(currentReferenceNumber).getFlightCode()).getMaxBaggageVolume();
+            return maxVolume;
+        }
+        return -1;
+    }
+
+    public int getMaxBaggageWeight() {
+        if (currentReferenceNumber != null && !currentReferenceNumber.isEmpty()) {
+            int maxWeight = flightDetailsMap.get(ticketsMap.get(currentReferenceNumber).getFlightCode()).getMaxBaggageWeight();
+            return maxWeight;
+        }
+        return -1;
+    }
+
     // Calculates extra charges based on baggage weight and volume, updating totals accordingly.
     public String calcExtraCharge(String enteredReferenceNumber, String enteredBaggageWeight, String vol) {
-        int maxWeight = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getMaxBaggageWeight();
-        int charge = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getExtraBaggageCharge();
+        //currentFlight = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode());
+        int chargedWeight = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getChargedBaggageWeight();
+        int charge = flightDetailsMap.get(ticketsMap.get(enteredReferenceNumber).getFlightCode()).getMaxBaggageVolume();
 
-        double extraWeightage = Double.parseDouble(enteredBaggageWeight) - maxWeight;
+        double extraWeightage = Double.parseDouble(enteredBaggageWeight) - chargedWeight;
         double chargePayable = extraWeightage > 0 ? extraWeightage * charge : 0;
 
         String chargeLabel = String.valueOf(chargePayable);
