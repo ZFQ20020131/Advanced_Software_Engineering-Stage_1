@@ -36,16 +36,19 @@ Note: Due to the limited functionality of this system, please check in all passe
 #### Tasks Distribution:
 
 * Fuquan:
-    - [x] Implementation of CheckinCounter
-    - [x] UML diagram creation
+    - [x] Implementation of Class CheckinCounter
+    - [x] Implementation of Class Passenger
+    - [x] Modified the GUI class and the CheckInCounter class, and enhanced the functionality for generating the report
 * Shuchen:
-    - [x] Implementation of CheckinCounter, PassengerQueue
-    - [x] Implementation of SimTime, Timer
+    - [x] Implementation of Class Name
+    - [x] Implementation of Class ticket
 * Yuyao:
-    - [x] Implementation of ManagementGUI
-    - [x] Project Management, Git repository management
+    - [x] Implementation of Class CheckinCounterTest
+    - [x] Implementation of BookingDetails
+    - [x] Implementation of FlightDetails
 * Wentian:
-    - [x] Implementation of Class Log
+    - [x] Implementation of Class flight
+    - [x] Debugging the code
 * Muduo:
-    - [x] Refactor of Class Booking
-    - [x] CSVGenerator & Reader refactor
+    - [x] Implementation of Class GUI
+    - [x] Debugging the code
