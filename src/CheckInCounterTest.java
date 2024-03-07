@@ -25,8 +25,8 @@ class CheckInCounterTest {
         flight testFlight = new flight();
         testFlight.setFlightCode("FL123");
         testFlight.setMaxPassengersCount(200);
-        testFlight.setMaxBaggageWeight(20); // Assuming the max baggage weight is 20kg
-        testFlight.setExtraBaggageCharge(100); // Extra charge per kg for overweight
+        testFlight.setChargedBaggageWeight(20); // Assuming the max baggage weight is 20kg
+        testFlight.setMaxBaggageVolume(100); // Extra charge per kg for overweight
 
         checkInCounter.ticketsMap.put("validRef", testTicket);
         checkInCounter.flightDetailsMap.put("FL123", testFlight);
