@@ -1,18 +1,11 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.awt.Font;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.BorderFactory;
+import javax.swing.*;
 import javax.swing.border.Border;
+
 
 
 public class GUI extends JFrame implements ActionListener {
@@ -81,16 +74,16 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void createSummaryWindow() {
-
         frameFour = new JFrame("Summary");
         frameFour.setDefaultCloseOperation(frameFour.DISPOSE_ON_CLOSE);
         createPanelFive();
-        frameFour.setSize(500, 500);
+        frameFour.setSize(700, 500);
         frameFour.setVisible(true);
         frameFour.setLayout(new BorderLayout());
         frameFour.setLocation(200, 200);
 
     }
+
 
     public void createPanelOne() {
         referenceTextField = new JTextField(16);
@@ -155,6 +148,8 @@ public class GUI extends JFrame implements ActionListener {
         ReferenceNumberLabel.setFont(new Font("Arial", Font.BOLD, 16));
         panelTwo.add(ReferenceNumberLabel);
         panelTwo.add(checkedReferenceNumberTextField);
+        checkInCounterObj.setCurrentReferenceNumber(enteredReferenceNumber);
+
 
         JLabel lastNameLabel = new JLabel("Last Name");
         lastNameLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -269,27 +264,28 @@ public class GUI extends JFrame implements ActionListener {
 
     public void createPanelFive() {
         panelFive = new JPanel();
-        panelFive.setBackground(new Color(230, 240, 250)); // Light blue background
+        panelFive.setLayout(new BoxLayout(panelFive, BoxLayout.Y_AXIS));
+        panelFive.setBackground(new Color(230, 240, 250));
 
-        JLabel checkedInPassLabel = new JLabel("Total " + checkInCounterObj.totalPassengersCheckedIn + " Passengers Checked In");
-        checkedInPassLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        JLabel[] labels = new JLabel[]{
+                new JLabel("Total " + checkInCounterObj.totalPassengersCheckedIn + " Passengers Checked In"),
+                new JLabel("Total " + checkInCounterObj.totalBaggageVolumeCheckedIn + " volume of baggage checked in"),
+                new JLabel("Total " + checkInCounterObj.totalBaggageWeightCheckedIn + " weight of baggage checked in"),
+                new JLabel("Total " + checkInCounterObj.totalExcessBaggageFeeCollected + " excess baggage fee collected"),
+                new JLabel(checkInCounterObj.totalPassengersCheckedIn - checkInCounterObj.getMaxPassengers() > 0 ? "The number of passengers exceeds the limit by " + (checkInCounterObj.totalPassengersCheckedIn - checkInCounterObj.getMaxPassengers()) + " people" : "The total number of passengers does not exceed the limit."),
+                new JLabel(checkInCounterObj.totalBaggageVolumeCheckedIn - checkInCounterObj.getMaxBaggageVolume() > 0 ? "The total volume of luggage exceeds the limit by " + (checkInCounterObj.totalBaggageVolumeCheckedIn - checkInCounterObj.getMaxBaggageVolume()) : "The total volume of luggage does not exceed the limit."),
+                new JLabel(checkInCounterObj.totalBaggageWeightCheckedIn - checkInCounterObj.getMaxBaggageWeight() > 0 ? "The total weight of luggage exceeds the limit by " + (checkInCounterObj.totalBaggageWeightCheckedIn - checkInCounterObj.getMaxBaggageWeight()) : "The total weight of luggage does not exceed the limit.")
+        };
 
-        JLabel bagVolLabel = new JLabel("Total " + checkInCounterObj.totalBaggageVolumeCheckedIn + " volume of baggage checked in");
-        bagVolLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        for (JLabel label : labels) {
+            label.setFont(new Font("Arial", Font.BOLD, 16));
+            panelFive.add(label);
+            panelFive.add(Box.createRigidArea(new Dimension(0, 5)));
+        }
 
-        JLabel bagWeightLabel = new JLabel("Total " + checkInCounterObj.totalBaggageWeightCheckedIn + " weight of baggage checked in");
-        bagWeightLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
-        JLabel feeLabel = new JLabel("Total " + checkInCounterObj.totalExcessBaggageFeeCollected + " excess baggage fee collected");
-        feeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
-        panelFive.add(checkedInPassLabel);
-        panelFive.add(bagVolLabel);
-        panelFive.add(bagWeightLabel);
-        panelFive.add(feeLabel);
-
-        frameFour.getContentPane().add(panelFive);
+        frameFour.getContentPane().add(panelFive, BorderLayout.CENTER);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
